@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q-Criterion and Actuation Force</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 24px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #24292f;
+      background: #ffffff;
+    }
+
+    header {
+      max-width: 1600px;
+      margin: 0 auto 22px;
+      text-align: center;
+    }
+
+    h1 {
+      margin: 0 0 10px;
+      font-size: 28px;
+    }
+
+    .intro {
+      color: #57606a;
+      line-height: 1.5;
+      margin: 0 auto;
+      max-width: 900px;
+    }
+
+    /* Three columns on desktop */
+    .layout {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+      max-width: 1600px;
+      margin: 0 auto;
+      align-items: start;
+    }
+
+    .video-card,
+    .force-card {
+      min-width: 0;
+    }
+
+    .video-card h2,
+    .force-card h2 {
+      text-align: center;
+      font-size: 18px;
+      margin: 0 0 10px;
+      font-weight: 600;
+    }
+
+    .video-card video {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background: #111111;
+      border-radius: 5px;
+    }
+
+    /* Explicit positions: graphs only under actuated cases */
+    .q-natural {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .q-spanwise {
+      grid-column: 2;
+      grid-row: 1;
+    }
+
+    .q-streamwise {
+      grid-column: 3;
+      grid-row: 1;
+    }
+
+    .force-spanwise {
+      grid-column: 2;
+      grid-row: 2;
+    }
+
+    .force-streamwise {
+      grid-column: 3;
+      grid-row: 2;
+    }
+
+    .force-subtitle {
+      text-align: center;
+      color: #57606a;
+      font-size: 14px;
+      margin: 0 0 4px;
+    }
+
+    .force-chart {
+      display: block;
+      width: 100%;
+      height: auto;
+      background: #ffffff;
+    }
+
+    .caption {
+      text-align: center;
+      color: #57606a;
+      font-size: 13px;
+      line-height: 1.4;
+      margin: 6px 0 0;
+    }
+
+    /* Mobile layout */
+    @media (max-width: 900px) {
+      body {
+        padding: 16px;
+      }
+
+      .layout {
+        grid-template-columns: 1fr;
+        max-width: 700px;
+      }
+
+      .q-natural,
+      .q-spanwise,
+      .q-streamwise,
+      .force-spanwise,
+      .force-streamwise {
+        grid-column: auto;
+        grid-row: auto;
+      }
+
+      .video-card h2,
+      .force-card h2 {
+        font-size: 19px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>Q-Criterion and Actuation Force</h1>
+    <p class="intro">
+      Comparison of the natural flow and the two plasma-actuation
+      configurations. The normalized force histories are shown below
+      the corresponding actuated cases.
+    </p>
+  </header>
+
+  <main class="layout">
+
+    <!-- ROW 1, COLUMN 1: NATURAL FLOW -->
+    <section class="video-card q-natural">
+      <h2>Unforced</h2>
+      <video
+        id="video-natural"
+        src="https://github.com/user-attachments/assets/97d04b08-49f8-43ac-9db1-8278e50af321"
+        autoplay muted loop playsinline controls>
+      </video>
+    </section>
+
+    <!-- ROW 1, COLUMN 2: SPANWISE FLOW -->
+    <section class="video-card q-spanwise">
+      <h2>Spanwise (<i>St</i> = 1.64)</h2>
+      <video
+        id="video-spanwise"
+        src="https://github.com/user-attachments/assets/d0eca019-a335-4600-84f2-fb3f427ebab6"
+        autoplay muted loop playsinline controls>
+      </video>
+    </section>
+
+    <!-- ROW 1, COLUMN 3: STREAMWISE FLOW -->
+    <section class="video-card q-streamwise">
+      <h2>Streamwise (<i>St</i> = 2.13)</h2>
+      <video
+        id="video-streamwise"
+        src="https://github.com/user-attachments/assets/6e7760d1-ae96-4cae-a415-48f24e8f48a3"
+        autoplay muted loop playsinline controls>
+      </video>
+    </section>
+
+    <!-- ROW 2, COLUMN 2: SPANWISE FORCE -->
+    <section class="force-card force-spanwise">
+      <h2>Actuation force — Spanwise</h2>
+      <p class="force-subtitle">
+        f_act = 1000 Hz
+      </p>
+
+      <svg
+        id="chart-spanwise"
+        class="force-chart"
+        viewBox="0 0 600 290"
+        role="img"
+        aria-label="Normalized spanwise actuation force over time">
+      </svg>
+
+      <p class="caption">Normalized force, F(t)/F₀</p>
+    </section>
+
+    <!-- ROW 2, COLUMN 3: STREAMWISE FORCE -->
+    <section class="force-card force-streamwise">
+      <h2>Actuation force — Streamwise</h2>
+      <p class="force-subtitle">
+        f_act = 1300 Hz
+      </p>
+
+      <svg
+        id="chart-streamwise"
+        class="force-chart"
+        viewBox="0 0 600 290"
+        role="img"
+        aria-label="Normalized streamwise actuation force over time">
+      </svg>
+
+      <p class="caption">Normalized force, F(t)/F₀</p>
+    </section>
+
+  </main>
+
+  <script>
+    const SVG_NS = "http://www.w3.org/2000/svg";
+
+    // Graph dimensions and time window
+    const LEFT = 65;
+    const RIGHT = 580;
+    const TOP = 24;
+    const BOTTOM = 218;
+    const T_MAX_MS = 5;
+    const Y_MAX = 1.15;
+
+    function addSVG(svg, tag, attributes, text) {
+      const element = document.createElementNS(SVG_NS, tag);
+
+      for (const [key, value] of Object.entries(attributes)) {
+        element.setAttribute(key, value);
+      }
+
+      if (text !== undefined) {
+        element.textContent = text;
+      }
+
+      svg.appendChild(element);
+      return element;
+    }
+
+    function forceValue(tMs, frequencyHz) {
+      const tSeconds = tMs / 1000;
+      return Math.abs(
+        Math.sin(2 * Math.PI * frequencyHz * tSeconds)
+      );
+    }
+
+    function xPosition(tMs) {
+      return LEFT + (tMs / T_MAX_MS) * (RIGHT - LEFT);
+    }
+
+    function yPosition(force) {
+      return BOTTOM -
+        (force / Y_MAX) * (BOTTOM - TOP);
+    }
+
+    function buildForceChart(svgId, frequencyHz, videoId) {
+      const svg = document.getElementById(svgId);
+      const video = document.getElementById(videoId);
+
+      // Horizontal grid and y-axis labels
+      [0, 0.5, 1.0].forEach(value => {
+        const y = yPosition(value);
+
+        addSVG(svg, "line", {
+          x1: LEFT,
+          y1: y,
+          x2: RIGHT,
+          y2: y,
+          stroke: "#d9d9d9",
+          "stroke-width": 1,
+          "stroke-dasharray": "4 4"
+        });
+
+        addSVG(svg, "text", {
+          x: LEFT - 12,
+          y: y + 6,
+          "text-anchor": "end",
+          "font-size": 17,
+          fill: "#24292f"
+        }, value.toFixed(1));
+      });
+
+      // Vertical grid and x-axis labels
+      for (let ms = 0; ms <= 5; ms += 1) {
+        const x = xPosition(ms);
+
+        addSVG(svg, "line", {
+          x1: x,
+          y1: TOP,
+          x2: x,
+          y2: BOTTOM,
+          stroke: "#e2e2e2",
+          "stroke-width": 1,
+          "stroke-dasharray": "4 4"
+        });
+
+        addSVG(svg, "text", {
+          x: x,
+          y: BOTTOM + 25,
+          "text-anchor": "middle",
+          "font-size": 17,
+          fill: "#24292f"
+        }, String(ms));
+      }
+
+      // Axes
+      addSVG(svg, "line", {
+        x1: LEFT,
+        y1: TOP,
+        x2: LEFT,
+        y2: BOTTOM,
+        stroke: "#24292f",
+        "stroke-width": 1.8
+      });
+
+      addSVG(svg, "line", {
+        x1: LEFT,
+        y1: BOTTOM,
+        x2: RIGHT,
+        y2: BOTTOM,
+        stroke: "#24292f",
+        "stroke-width": 1.8
+      });
+
+      // Axis titles
+      addSVG(svg, "text", {
+        x: (LEFT + RIGHT) / 2,
+        y: 277,
+        "text-anchor": "middle",
+        "font-size": 20,
+        fill: "#24292f"
+      }, "t [ms]");
+
+      addSVG(svg, "text", {
+        x: 19,
+        y: (TOP + BOTTOM) / 2,
+        transform: `rotate(-90 19 ${(TOP + BOTTOM) / 2})`,
+        "text-anchor": "middle",
+        "font-size": 20,
+        fill: "#24292f"
+      }, "F(t)/F₀");
+
+      // Static normalized rectified-sine curve
+      let path = "";
+
+      const samples = 1000;
+
+      for (let i = 0; i <= samples; i++) {
+        const tMs = T_MAX_MS * i / samples;
+        const force = forceValue(tMs, frequencyHz);
+        const x = xPosition(tMs);
+        const y = yPosition(force);
+
+        path += `${i === 0 ? "M" : "L"} ${x} ${y} `;
+      }
+
+      addSVG(svg, "path", {
+        d: path,
+        fill: "none",
+        stroke: "#75aee8",
+        "stroke-width": 2.2
+      });
+
+      // Moving red point
+      const marker = addSVG(svg, "circle", {
+        cx: xPosition(0),
+        cy: yPosition(0),
+        r: 5,
+        fill: "#e53935",
+        stroke: "#ffffff",
+        "stroke-width": 1
+      });
+
+      // Make the marker follow the corresponding Q-criterion video.
+      function updateMarker() {
+        let progress = 0;
+
+        if (
+          video &&
+          Number.isFinite(video.duration) &&
+          video.duration > 0
+        ) {
+          progress = video.currentTime / video.duration;
+        }
+
+        progress = Math.max(0, Math.min(1, progress));
+
+        const tMs = progress * T_MAX_MS;
+        const force = forceValue(tMs, frequencyHz);
+
+        marker.setAttribute("cx", xPosition(tMs));
+        marker.setAttribute("cy", yPosition(force));
+
+        requestAnimationFrame(updateMarker);
+      }
+
+      updateMarker();
+    }
+
+    // Spanwise: 1000 Hz; tied to the spanwise Q animation.
+    buildForceChart("chart-spanwise", 1000, "video-spanwise");
+
+    // Streamwise: 1300 Hz; tied to the streamwise Q animation.
+    buildForceChart("chart-streamwise", 1300, "video-streamwise");
+  </script>
+
+</body>
+</html>
