@@ -1,0 +1,115 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Q-Criterion - Flow Animations</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 28px;
+      font-family: Arial, Helvetica, sans-serif;
+      color: #24292f;
+      background: #ffffff;
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      text-align: center;
+      font-size: 28px;
+    }
+
+    .intro {
+      margin: 0 auto 28px;
+      max-width: 900px;
+      text-align: center;
+      color: #57606a;
+      line-height: 1.5;
+    }
+
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+      max-width: 1500px;
+      margin: 0 auto;
+    }
+
+    .video-card {
+      min-width: 0;
+    }
+
+    .video-card h2 {
+      margin: 0 0 10px;
+      text-align: center;
+      font-size: 19px;
+      font-weight: 600;
+    }
+
+    video {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: contain;
+      background: #111111;
+      border-radius: 6px;
+    }
+
+    @media (max-width: 900px) {
+      .video-grid {
+        grid-template-columns: 1fr;
+        max-width: 720px;
+      }
+
+      body {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>Q-Criterion: Flow Animations</h1>
+
+  <p class="intro">
+    Comparison between the natural flow and the two plasma
+    actuation configurations.
+  </p>
+
+  <main class="video-grid">
+
+    <section class="video-card">
+      <h2>Natural Case</h2>
+      <video
+        src="https://github.com/user-attachments/assets/97d04b08-49f8-43ac-9db1-8278e50af321"
+        autoplay muted loop playsinline controls>
+      </video>
+    </section>
+
+    <section class="video-card">
+      <h2>Spanwise Actuation</h2>
+      <video
+        src="https://github.com/user-attachments/assets/d0eca019-a335-4600-84f2-fb3f427ebab6"
+        autoplay muted loop playsinline controls>
+      </video>
+    </section>
+
+    <section class="video-card">
+      <h2>Streamwise Actuation</h2>
+      <video
+        src="https://github.com/user-attachments/assets/6e7760d1-ae96-4cae-a415-48f24e8f48a3"
+        autoplay muted loop playsinline controls>
+      </video>
+    </section>
+
+  </main>
+
+</body>
+</html>
