@@ -96,6 +96,22 @@
       grid-row: 2;
     }
 
+    /* Colorbar below the natural case */
+  .q-colorbar {
+    grid-column: 1;
+    grid-row: 2;
+    text-align: center;
+  }
+    
+  .colorbar-image {
+    display: block;
+    width: 100%;
+    max-width: 520px;
+    height: auto;
+    margin: 12px auto 0;
+    object-fit: contain;
+  }
+
     .force-subtitle {
       text-align: center;
       color: #57606a;
@@ -130,6 +146,7 @@
       }
 
       .q-natural,
+      .q-colorbar,
       .q-spanwise,
       .q-streamwise,
       .force-spanwise,
@@ -166,6 +183,20 @@
         autoplay muted loop playsinline controls>
       </video>
     </section>
+
+  <!-- ROW 2, COLUMN 1: Q-CRITERION COLORBAR -->
+  <section class="video-card q-colorbar">
+    <h2>Scala dei colori</h2>
+
+    <img
+      src="./colorbar_Q_presentation.png"
+      alt="Colorbar utilizzata per rappresentare il campo di velocità nel criterio Q"
+      class="colorbar-image">
+  
+    <p class="caption">
+      Scala cromatica utilizzata nella visualizzazione del flusso.
+    </p>
+  </section>
 
     <!-- ROW 1, COLUMN 2: SPANWISE FLOW -->
     <section class="video-card q-spanwise">
